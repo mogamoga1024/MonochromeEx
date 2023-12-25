@@ -24,26 +24,26 @@ const vm = {
     methods: {
         async onClickApplyButton() {
             if (this.isSelected.averageMethod) {
-                await this.updateAverageMethodCanvas();
+                await this.updateCanvas(
+                    this.$refs.averageMethodCanvas,
+                    this.applyAverageMethod
+                );
             }
             if (this.isSelected.weightedAverageMethod) {
-                await this.updateWeightedAverageMethodCanvas();
+                await this.updateCanvas(
+                    this.$refs.weightedAverageMethodCanvas,
+                    this.applyWeightedAverageMethod
+                );
             }
             if (this.isSelected.luminosityMethod) {
-                await this.updateLuminosityMethodCanvas();
+                await this.updateCanvas(
+                    this.$refs.luminosityMethodCanvas,
+                    this.applyLuminosityMethod
+                );
             }
             this.shouldDisplayCanvas.averageMethod = this.isSelected.averageMethod;
             this.shouldDisplayCanvas.weightedAverageMethod = this.isSelected.weightedAverageMethod;
             this.shouldDisplayCanvas.luminosityMethodCanvas = this.isSelected.luminosityMethodCanvas;
-        },
-        updateAverageMethodCanvas() {
-            return this.updateCanvas(this.$refs.averageMethodCanvas, this.applyAverageMethod);
-        },
-        updateWeightedAverageMethodCanvas() {
-            return this.updateCanvas(this.$refs.weightedAverageMethodCanvas, this.applyWeightedAverageMethod);
-        },
-        updateLuminosityMethodCanvas() {
-            return this.updateCanvas(this.$refs.luminosityMethodCanvas, this.applyLuminosityMethod);
         },
         updateCanvas(canvas, applyMethod) {
             const image = new Image();
