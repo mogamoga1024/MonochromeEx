@@ -11,21 +11,22 @@
   <div id="app">
     <div id="option">
       <label for="average-method">平均法</label>
-      <input id="average-method" type="checkbox" v-model="isAverageMethodSelected">
+      <input id="average-method" type="checkbox" v-model="isSelected.averageMethod">
       <label for="weighted-average-method">加重平均法</label>
-      <input id="weighted-average-method" type="checkbox" v-model="isWeightedAverageMethodSelected">
+      <input id="weighted-average-method" type="checkbox" v-model="isSelected.weightedAverageMethod">
       <label for="luminosity-method">輝度法</label>
-      <input id="luminosity-method" type="checkbox" v-model="isLuminosityMethodSelected">
+      <input id="luminosity-method" type="checkbox" v-model="isSelected.luminosityMethod">
     </div>
-    <div class="result" v-show="isAverageMethodSelected">
+    <button @click="onClickApplyButton">適用</button>
+    <div class="result" v-show="shouldDisplayCanvas.averageMethod">
       <div class="method-name">平均法</div>
       <canvas ref="averageMethodCanvas"></canvas>
     </div>
-    <div class="result" v-show="isWeightedAverageMethodSelected">
+    <div class="result" v-show="shouldDisplayCanvas.weightedAverageMethod">
       <div class="method-name">加重平均法</div>
       <canvas ref="weightedAverageMethodCanvas"></canvas>
     </div>
-    <div class="result" v-show="isLuminosityMethodSelected">
+    <div class="result" v-show="shouldDisplayCanvas.luminosityMethod">
       <div class="method-name">輝度法</div>
       <canvas ref="luminosityMethodCanvas"></canvas>
     </div>

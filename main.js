@@ -2,28 +2,50 @@
 const vm = {
     data() {
         return {
-            isAverageMethodSelected: true,
-            isWeightedAverageMethodSelected: false,
-            isLuminosityMethodSelected: false,
+            isSelected: {
+                averageMethod: true,
+                weightedAverageMethod: true,
+                luminosityMethod: true,
+            },
+            shouldDisplayCanvas: {
+                averageMethod: true,
+                weightedAverageMethod: true,
+                luminosityMethod: true,
+            },
+            imageSrc: "",
         }
     },
     mounted() {
-        this.updateCanvas("AverageMethod", "images/clover_days.jpg");
+        this.imageSrc = "images/clover_days.jpg";
         // image.src = "images/2.jpg";
         // image.src = "images/しもんきん.jpg";
+        this.onClickApplyButton();
     },
     methods: {
-        updateCanvas(methodName, imageSrc) {
-            let canvas, applyMethod;
-
-            switch (methodName) {
-                case "AverageMethod":
-                    canvas = this.$refs.averageMethodCanvas;
-                    applyMethod = this.applyAverageMethod;
-                case "WeightedAverage":
-                case "LuminosityMethod":
+        onClickApplyButton() {
+            if (this.isSelected.averageMethod) {
+                this.updateAverageMethodCanvas();
             }
-
+            if (this.isSelected.weightedAverageMethod) {
+                this.updateWeightedAverageMethodCanvas();
+            }
+            if (this.isSelected.luminosityMethod) {
+                this.updateLuminosityMethodCanvas();
+            }
+            this.shouldDisplayCanvas.averageMethod = this.isSelected.averageMethod;
+            this.shouldDisplayCanvas.weightedAverageMethod = this.isSelected.weightedAverageMethod;
+            this.shouldDisplayCanvas.luminosityMethodCanvas = this.isSelected.luminosityMethodCanvas;
+        },
+        updateAverageMethodCanvas() {
+            this.updateCanvas(this.$refs.averageMethodCanvas, this.applyAverageMethod);
+        },
+        updateWeightedAverageMethodCanvas() {
+            this.updateCanvas(this.$refs.weightedAverageMethodCanvas, this.applyWeightedAverageMethod);
+        },
+        updateLuminosityMethodCanvas() {
+            this.updateCanvas(this.$refs.luminosityMethodCanvas, this.applyLuminosityMethod);
+        },
+        updateCanvas(canvas, applyMethod) {
             const image = new Image();
             image.onload = () => {
                 const context = canvas.getContext("2d");
@@ -34,7 +56,7 @@ const vm = {
                 applyMethod(imageData);
                 context.putImageData(imageData, 0, 0);
             };
-            image.src = imageSrc;
+            image.src = this.imageSrc;
         },
         applyAverageMethod(imageData) {
             const data = imageData.data;
