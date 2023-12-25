@@ -41,7 +41,7 @@ const vm = {
                     this.applyLuminosityMethod
                 );
             }
-            this.shouldDisplayCanvas = this.isSelected;
+            Object.assign(this.shouldDisplayCanvas, this.isSelected);
         },
         updateCanvas(canvas, applyMethod) {
             const image = new Image();
