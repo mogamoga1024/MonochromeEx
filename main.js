@@ -16,8 +16,8 @@ const vm = {
             this.monochromeEx(imageData);
             context.putImageData(imageData, 0, 0);
         };
-        // image.src = "images/clover_days.jpg";
-        image.src = "images/2.jpg";
+        image.src = "images/clover_days.jpg";
+        // image.src = "images/2.jpg";
         // image.src = "images/しもんきん.jpg";
     },
     methods: {
@@ -27,43 +27,53 @@ const vm = {
                 const red   = data[i];
                 const green = data[i + 1];
                 const blue  = data[i + 2];
-                const max = Math.max(red, green, blue);
-                const average = (red + green + blue) / 3;
+                const min = Math.min(red, green, blue);
+                // 参考：https://musashi-ai.com/glossary/2023/06/132b15f51be239030f34b40a152b0c724506964c.html
+                // const average = (red + green + blue) / 3;
+                // const average = 0.2989 * red + 0.5870 * green + 0.1140 * blue;
+                const average = 0.21 * red + 0.72 * green + 0.07 * blue;
                 data[i]     = average;
                 data[i + 1] = average;
                 data[i + 2] = average;
+                // data[i]     = min;
+                // data[i + 1] = min;
+                // data[i + 2] = min;
+                // data[i]     = 0x00;
+                // data[i + 1] = 0x00;
+                // data[i + 2] = 0x00;
+                // data[i + 3] = 0xFF - average;
                 continue;
                 if (red === green && green === blue) {
                     data[i]     = average;
                     data[i + 1] = average;
                     data[i + 2] = average;
                 }
-                else if (max === red && max === green) {
+                else if (min === red && min === green) {
                     data[i]     = average;
                     data[i + 1] = average;
                     data[i + 2] = 0xFF;
                 }
-                else if (max === red && max === blue) {
+                else if (min === red && min === blue) {
                     data[i]     = average;
                     data[i + 1] = 0xFF;
                     data[i + 2] = average;
                 }
-                else if (max === green && max === blue) {
+                else if (min === green && min === blue) {
                     data[i]     = 0xFF;
                     data[i + 1] = average;
                     data[i + 2] = average;
                 }
-                else if (max === red) {
+                else if (min === red) {
                     data[i]     = average;
                     data[i + 1] = 0xFF;
                     data[i + 2] = 0xFF;
                 }
-                else if (max === green) {
+                else if (min === green) {
                     data[i]     = 0xFF;
                     data[i + 1] = average;
                     data[i + 2] = 0xFF;
                 }
-                else if (max === blue) {
+                else if (min === blue) {
                     data[i]     = 0xFF;
                     data[i + 1] = 0xFF;
                     data[i + 2] = average;
