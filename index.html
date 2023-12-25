@@ -17,7 +17,18 @@
       <label for="luminosity-method">輝度法</label>
       <input id="luminosity-method" type="checkbox" checked>
     </div>
-    <canvas ref="canvas"></canvas>
+    <div class="result">
+      <div class="method-name">平均法</div>
+      <canvas ref="averageMethodCanvas"></canvas>
+    </div>
+    <div class="result">
+      <div class="method-name">加重平均法</div>
+      <canvas ref="weightedAverageMethodCanvas"></canvas>
+    </div>
+    <div class="result">
+      <div class="method-name">輝度法</div>
+      <canvas ref="luminosityMethodCanvas"></canvas>
+    </div>
   </div>
 
   <script src="main.js"></script>

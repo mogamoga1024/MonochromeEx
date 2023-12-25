@@ -2,3 +2,13 @@
 #option label:not(:first-of-type) {
   margin-left: 8px;
 }
+
+.result {
+  margin-top: 8px;
+}
+
+.method-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
