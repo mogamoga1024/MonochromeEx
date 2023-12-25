@@ -16,47 +16,54 @@ const vm = {
         }
     },
     mounted() {
-        this.imageSrc = "images/clover_days.jpg";
-        // image.src = "images/2.jpg";
-        // image.src = "images/しもんきん.jpg";
+        // this.imageSrc = "images/clover_days.jpg";
+        this.imageSrc = "images/2.jpg";
+        // this.imageSrc = "images/しもんきん.jpg";
         this.onClickApplyButton();
     },
     methods: {
-        onClickApplyButton() {
+        async onClickApplyButton() {
             if (this.isSelected.averageMethod) {
-                this.updateAverageMethodCanvas();
+                await this.updateAverageMethodCanvas();
             }
             if (this.isSelected.weightedAverageMethod) {
-                this.updateWeightedAverageMethodCanvas();
+                await this.updateWeightedAverageMethodCanvas();
             }
             if (this.isSelected.luminosityMethod) {
-                this.updateLuminosityMethodCanvas();
+                await this.updateLuminosityMethodCanvas();
             }
             this.shouldDisplayCanvas.averageMethod = this.isSelected.averageMethod;
             this.shouldDisplayCanvas.weightedAverageMethod = this.isSelected.weightedAverageMethod;
             this.shouldDisplayCanvas.luminosityMethodCanvas = this.isSelected.luminosityMethodCanvas;
         },
         updateAverageMethodCanvas() {
-            this.updateCanvas(this.$refs.averageMethodCanvas, this.applyAverageMethod);
+            return this.updateCanvas(this.$refs.averageMethodCanvas, this.applyAverageMethod);
         },
         updateWeightedAverageMethodCanvas() {
-            this.updateCanvas(this.$refs.weightedAverageMethodCanvas, this.applyWeightedAverageMethod);
+            return this.updateCanvas(this.$refs.weightedAverageMethodCanvas, this.applyWeightedAverageMethod);
         },
         updateLuminosityMethodCanvas() {
-            this.updateCanvas(this.$refs.luminosityMethodCanvas, this.applyLuminosityMethod);
+            return this.updateCanvas(this.$refs.luminosityMethodCanvas, this.applyLuminosityMethod);
         },
         updateCanvas(canvas, applyMethod) {
             const image = new Image();
-            image.onload = () => {
-                const context = canvas.getContext("2d");
-                canvas.width = image.width;
-                canvas.height = image.height;
-                context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
-                const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-                applyMethod(imageData);
-                context.putImageData(imageData, 0, 0);
-            };
-            image.src = this.imageSrc;
+            return new Promise((resolve, reject) => {
+                image.onload = () => {
+                    const context = canvas.getContext("2d");
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+                    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                    applyMethod(imageData);
+                    context.putImageData(imageData, 0, 0);
+                    resolve();
+                };
+                image.onerror = e => {
+                    console.error(e);
+                    reject();
+                };
+                image.src = this.imageSrc;
+            });
         },
         applyAverageMethod(imageData) {
             const data = imageData.data;
