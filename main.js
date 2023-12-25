@@ -16,8 +16,8 @@ const vm = {
         }
     },
     mounted() {
-        // this.imageSrc = "images/clover_days.jpg";
-        this.imageSrc = "images/2.jpg";
+        this.imageSrc = "images/clover_days.jpg";
+        // this.imageSrc = "images/2.jpg";
         // this.imageSrc = "images/しもんきん.jpg";
         this.onClickApplyButton();
     },
@@ -52,6 +52,7 @@ const vm = {
                     const context = canvas.getContext("2d");
                     canvas.width = image.width;
                     canvas.height = image.height;
+                    canvas.style.maxWidth = `${image.width}px`;
                     context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
                     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
                     applyMethod(imageData);
