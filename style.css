@@ -1,0 +1,4 @@
+
+#option label:not(:first-of-type) {
+  margin-left: 8px;
+}

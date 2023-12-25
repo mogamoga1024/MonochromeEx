@@ -3,12 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>モノクロ拡張</title>
+  <title>グレースケールの研究</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="app">
+    <div id="option">
+      <label for="average-method">平均法</label>
+      <input id="average-method" type="checkbox" checked>
+      <label for="weighted-average-method">加重平均法</label>
+      <input id="weighted-average-method" type="checkbox" checked>
+      <label for="luminosity-method">輝度法</label>
+      <input id="luminosity-method" type="checkbox" checked>
+    </div>
     <canvas ref="canvas"></canvas>
   </div>
 
