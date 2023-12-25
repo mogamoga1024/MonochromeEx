@@ -28,7 +28,6 @@ const vm = {
                 const green = data[i + 1];
                 const blue  = data[i + 2];
                 const min = Math.min(red, green, blue);
-                // 参考：https://musashi-ai.com/glossary/2023/06/132b15f51be239030f34b40a152b0c724506964c.html
                 // const average = (red + green + blue) / 3;
                 // const average = 0.2989 * red + 0.5870 * green + 0.1140 * blue;
                 const average = 0.21 * red + 0.72 * green + 0.07 * blue;
