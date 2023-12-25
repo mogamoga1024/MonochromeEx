@@ -41,9 +41,7 @@ const vm = {
                     this.applyLuminosityMethod
                 );
             }
-            this.shouldDisplayCanvas.averageMethod = this.isSelected.averageMethod;
-            this.shouldDisplayCanvas.weightedAverageMethod = this.isSelected.weightedAverageMethod;
-            this.shouldDisplayCanvas.luminosityMethodCanvas = this.isSelected.luminosityMethodCanvas;
+            this.shouldDisplayCanvas = this.isSelected;
         },
         updateCanvas(canvas, applyMethod) {
             const image = new Image();
