@@ -2,25 +2,40 @@
 const vm = {
     data() {
         return {
+            isAverageMethodSelected: true,
+            isWeightedAverageMethodSelected: false,
+            isLuminosityMethodSelected: false,
         }
     },
     mounted() {
-        const image = new Image();
-        image.onload = () => {
-            const canvas = this.$refs.averageMethodCanvas;
-            const context = canvas.getContext("2d");
-            canvas.width = image.width;
-            canvas.height = image.height;
-            context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            this.applyAverageMethod(imageData);
-            context.putImageData(imageData, 0, 0);
-        };
-        image.src = "images/clover_days.jpg";
+        this.updateCanvas("AverageMethod", "images/clover_days.jpg");
         // image.src = "images/2.jpg";
         // image.src = "images/しもんきん.jpg";
     },
     methods: {
+        updateCanvas(methodName, imageSrc) {
+            let canvas, applyMethod;
+
+            switch (methodName) {
+                case "AverageMethod":
+                    canvas = this.$refs.averageMethodCanvas;
+                    applyMethod = this.applyAverageMethod;
+                case "WeightedAverage":
+                case "LuminosityMethod":
+            }
+
+            const image = new Image();
+            image.onload = () => {
+                const context = canvas.getContext("2d");
+                canvas.width = image.width;
+                canvas.height = image.height;
+                context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+                const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                applyMethod(imageData);
+                context.putImageData(imageData, 0, 0);
+            };
+            image.src = imageSrc;
+        },
         applyAverageMethod(imageData) {
             const data = imageData.data;
             for (let i = 0; i < data.length; i += 4) {
