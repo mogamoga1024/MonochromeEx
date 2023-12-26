@@ -10,23 +10,25 @@
 <body>
   <div id="app">
     <div id="option">
-      <label for="average-method">平均法</label>
-      <input id="average-method" type="checkbox" v-model="isSelected.averageMethod">
-      <label for="weighted-average-method">加重平均法</label>
-      <input id="weighted-average-method" type="checkbox" v-model="isSelected.weightedAverageMethod">
-      <label for="luminosity-method">輝度法</label>
-      <input id="luminosity-method" type="checkbox" v-model="isSelected.luminosityMethod">
+      <button @click="onClickRandomImageButton">ランダム画像</button>
+      <div id="medhod-option">
+        <label for="average-method">平均法</label>
+        <input id="average-method" type="checkbox" v-model="isSelected.averageMethod">
+        <label for="weighted-average-method">加重平均法</label>
+        <input id="weighted-average-method" type="checkbox" v-model="isSelected.weightedAverageMethod">
+        <label for="luminosity-method">輝度法</label>
+        <input id="luminosity-method" type="checkbox" v-model="isSelected.luminosityMethod">
+      </div>
     </div>
-    <button @click="onClickApplyButton">適用</button>
-    <div class="result" v-show="shouldDisplayCanvas.averageMethod">
+    <div class="result" v-show="isSelected.averageMethod">
       <div class="method-name">平均法</div>
       <canvas ref="averageMethodCanvas"></canvas>
     </div>
-    <div class="result" v-show="shouldDisplayCanvas.weightedAverageMethod">
+    <div class="result" v-show="isSelected.weightedAverageMethod">
       <div class="method-name">加重平均法</div>
       <canvas ref="weightedAverageMethodCanvas"></canvas>
     </div>
-    <div class="result" v-show="shouldDisplayCanvas.luminosityMethod">
+    <div class="result" v-show="isSelected.luminosityMethod">
       <div class="method-name">輝度法</div>
       <canvas ref="luminosityMethodCanvas"></canvas>
     </div>
