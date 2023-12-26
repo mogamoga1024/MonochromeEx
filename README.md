@@ -1,2 +1,2 @@
-# MonochromeEx
-モノクロの拡張 研究
+# StudyOnGrayscale
+グレースケールの研究
