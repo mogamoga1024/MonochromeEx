@@ -22,6 +22,7 @@ const vm = {
             this.updateAllCanvas();
         },
         loadImage() {
+            URL.revokeObjectURL(this.imageSrc);
             const image = new Image();
             image.setAttribute("crossorigin", "anonymous");
             return new Promise((resolve, reject) => {
