@@ -9,6 +9,7 @@ const vm = {
                 luminosityMethod: true,
             },
             imageSrc: "https://picsum.photos/800/400",
+            isError: false,
         }
     },
     mounted() {
@@ -23,24 +24,39 @@ const vm = {
             this.updateAllCanvas();
         },
         onChangeFile(e) {
-            // todo
+            const file = e.target.files[0];
+            if (file == null) {
+                return;
+            }
+            this.imageSrc = URL.createObjectURL(file);
+            this.updateAllCanvas();
         },
         loadImage() {
-            URL.revokeObjectURL(this.imageSrc);
             const image = new Image();
             image.setAttribute("crossorigin", "anonymous");
             return new Promise((resolve, reject) => {
                 image.onload = () => {
+                    URL.revokeObjectURL(this.imageSrc);
                     resolve(image);
                 };
                 image.onerror = e => {
+                    URL.revokeObjectURL(this.imageSrc);
                     reject(e);
                 };
                 image.src = this.imageSrc;
             });
         },
         async updateAllCanvas() {
-            const image = await this.loadImage();
+            let image = undefined;
+            this.isError = false;
+            try {
+                image = await this.loadImage();
+            }
+            catch (e) {
+                this.isError = true;
+                return;
+            }
+
             this.updateCanvas(
                 this.$refs.unprocessedCanvas,
                 image,

@@ -23,22 +23,27 @@
         <input id="luminosity-method" type="checkbox" v-model="isSelected.luminosityMethod">
       </div>
     </div>
-    <div class="result" v-show="isSelected.unprocessed">
-      <div class="method-name">無加工</div>
-      <canvas ref="unprocessedCanvas"></canvas>
-    </div>
-    <div class="result" v-show="isSelected.averageMethod">
-      <div class="method-name">平均法</div>
-      <canvas ref="averageMethodCanvas"></canvas>
-    </div>
-    <div class="result" v-show="isSelected.weightedAverageMethod">
-      <div class="method-name">加重平均法</div>
-      <canvas ref="weightedAverageMethodCanvas"></canvas>
-    </div>
-    <div class="result" v-show="isSelected.luminosityMethod">
-      <div class="method-name">輝度法</div>
-      <canvas ref="luminosityMethodCanvas"></canvas>
-    </div>
+    <template v-if="isError">
+      <div id="error">エラー！本当に画像？</div>
+    </template>
+    <template v-else>
+      <div class="result" v-show="isSelected.unprocessed">
+        <div class="method-name">無加工</div>
+        <canvas ref="unprocessedCanvas"></canvas>
+      </div>
+      <div class="result" v-show="isSelected.averageMethod">
+        <div class="method-name">平均法</div>
+        <canvas ref="averageMethodCanvas"></canvas>
+      </div>
+      <div class="result" v-show="isSelected.weightedAverageMethod">
+        <div class="method-name">加重平均法</div>
+        <canvas ref="weightedAverageMethodCanvas"></canvas>
+      </div>
+      <div class="result" v-show="isSelected.luminosityMethod">
+        <div class="method-name">輝度法</div>
+        <canvas ref="luminosityMethodCanvas"></canvas>
+      </div>
+    </template>
   </div>
 
   <script src="main.js"></script>
