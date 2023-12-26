@@ -22,6 +22,9 @@ const vm = {
             this.imageSrc = "https://picsum.photos/800/400";
             this.updateAllCanvas();
         },
+        onChangeFile(e) {
+            // todo
+        },
         loadImage() {
             URL.revokeObjectURL(this.imageSrc);
             const image = new Image();

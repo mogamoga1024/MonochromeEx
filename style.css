@@ -4,12 +4,16 @@
   font-size: 1.1rem;
 }
 
-button {
+button, input {
   font-size: 1.1rem;
 }
 
 #option > *:not(:first-child) {
   margin-top: 4px;
+}
+
+#input-file {
+  display: block;
 }
 
 #medhod-option label:not(:first-of-type) {
