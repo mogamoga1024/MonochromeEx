@@ -3,6 +3,7 @@ const vm = {
     data() {
         return {
             isSelected: {
+                unprocessed: true,
                 averageMethod: true,
                 weightedAverageMethod: true,
                 luminosityMethod: true,
@@ -38,6 +39,11 @@ const vm = {
         async updateAllCanvas() {
             const image = await this.loadImage();
             this.updateCanvas(
+                this.$refs.unprocessedCanvas,
+                image,
+                this.applyUnprocessed
+            );
+            this.updateCanvas(
                 this.$refs.averageMethodCanvas,
                 image,
                 this.applyAverageMethod
@@ -62,6 +68,9 @@ const vm = {
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
             applyMethod(imageData);
             context.putImageData(imageData, 0, 0);
+        },
+        applyUnprocessed(imageData) {
+            // 何もしない
         },
         applyAverageMethod(imageData) {
             const data = imageData.data;
