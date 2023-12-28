@@ -91,7 +91,7 @@ const vm = {
             canvas.width = image.width;
             canvas.height = image.height;
             canvas.style.maxWidth = `${image.width}px`;
-            context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+            context.drawImage(image, 0, 0, image.width, image.height);
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
             applyMethod(imageData);
             context.putImageData(imageData, 0, 0);
