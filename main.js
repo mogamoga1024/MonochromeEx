@@ -78,12 +78,12 @@ const vm = {
             this.updateCanvas(
                 this.$refs.weightedAverageMethodCanvas,
                 image,
-                this.applyAverageMethod
+                this.applyWeightedAverageMethod
             );
             this.updateCanvas(
                 this.$refs.luminosityMethodCanvas,
                 image,
-                this.applyAverageMethod
+                this.applyLuminosityMethod
             );
         },
         updateCanvas(canvas, image, applyMethod) {
