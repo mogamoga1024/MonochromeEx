@@ -65,8 +65,11 @@ input[type="file"] {
   color: red;
 }
 
-.result {
+#result-container {
+  display: flex;
   margin-top: 8px;
+  flex-wrap: wrap;
+  column-gap: 8px;
 }
 
 .method-name {

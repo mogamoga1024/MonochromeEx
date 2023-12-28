@@ -98,10 +98,11 @@ const vm = {
         },
         updateCanvas(canvas, image, applyMethod) {
             const context = canvas.getContext("2d", {willReadFrequently: true});
-            canvas.width = image.width;
-            canvas.height = image.height;
+            const canvasWidth = image.width < 500 ? image.width : 500;
+            canvas.width = canvasWidth;
+            canvas.height = image.height * (canvasWidth / image.width);
             canvas.style.maxWidth = `${image.width}px`;
-            context.drawImage(image, 0, 0, image.width, image.height);
+            context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
             applyMethod(imageData);
             context.putImageData(imageData, 0, 0);

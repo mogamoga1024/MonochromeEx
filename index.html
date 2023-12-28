@@ -30,24 +30,24 @@
     <div id="processing" v-show="isProcessing">処理中…</div>
     <div v-show="!isProcessing">
       <div id="error" v-if="errorMessage !== ''">{{errorMessage}}</div>
-      <template v-else>
-        <div class="result" v-show="isSelected.unprocessed">
+      <div id="result-container" v-else>
+        <div v-show="isSelected.unprocessed">
           <div class="method-name">無加工</div>
           <canvas ref="unprocessedCanvas"></canvas>
         </div>
-        <div class="result" v-show="isSelected.averageMethod">
+        <div v-show="isSelected.averageMethod">
           <div class="method-name">平均法</div>
           <canvas ref="averageMethodCanvas"></canvas>
         </div>
-        <div class="result" v-show="isSelected.weightedAverageMethod">
+        <div v-show="isSelected.weightedAverageMethod">
           <div class="method-name">加重平均法</div>
           <canvas ref="weightedAverageMethodCanvas"></canvas>
         </div>
-        <div class="result" v-show="isSelected.luminosityMethod">
+        <div v-show="isSelected.luminosityMethod">
           <div class="method-name">輝度法</div>
           <canvas ref="luminosityMethodCanvas"></canvas>
         </div>
-      </template>
+      </div>
     </div>
   </div>
 
