@@ -97,7 +97,7 @@ const vm = {
             );
 
             // 2つ並びにする。8はcolumn-gap
-            this.$refs.resultContainer.style.width = `${this.$refs.unprocessedCanvas.width * 2 + 8}px`;
+            this.$refs.resultContainer.style.maxWidth = `${this.$refs.unprocessedCanvas.width * 2 + 8}px`;
             
             this.isProcessing = false;
         },
