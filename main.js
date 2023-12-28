@@ -9,6 +9,7 @@ const vm = {
                 luminosityMethod: true,
             },
             imageSrc: "https://picsum.photos/800/400",
+            isProcessing: false,
             errorMessage: "",
         }
     },
@@ -47,6 +48,7 @@ const vm = {
             });
         },
         async updateAllCanvas() {
+            this.isProcessing = true;
             let image = undefined;
             this.errorMessage = "";
             try {
@@ -54,6 +56,7 @@ const vm = {
             }
             catch (e) {
                 this.errorMessage = "エラー！本当に画像？";
+                this.isProcessing = false;
                 return;
             }
             const isValidCanvas = canvasSize.test({
@@ -62,6 +65,7 @@ const vm = {
             });
             if (!isValidCanvas) {
                 this.errorMessage = "画像がでかすぎます…";
+                this.isProcessing = false;
                 return;
             }
 
@@ -85,6 +89,7 @@ const vm = {
                 image,
                 this.applyLuminosityMethod
             );
+            this.isProcessing = false;
         },
         updateCanvas(canvas, image, applyMethod) {
             const context = canvas.getContext("2d", {willReadFrequently: true});

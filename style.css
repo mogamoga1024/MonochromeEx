@@ -20,6 +20,11 @@ button, input {
   margin-left: 8px;
 }
 
+#processing {
+  margin-top: 8px;
+  font-size: 1.4rem;
+}
+
 #error {
   margin-top: 8px;
   font-size: 1.4rem;
