@@ -30,7 +30,7 @@
     <div id="processing" v-show="isProcessing">処理中…</div>
     <div v-show="!isProcessing">
       <div id="error" v-if="errorMessage !== ''">{{errorMessage}}</div>
-      <div id="result-container" v-else>
+      <div ref="resultContainer" id="result-container" v-else>
         <div v-show="isSelected.unprocessed">
           <div class="method-name">無加工</div>
           <canvas ref="unprocessedCanvas"></canvas>

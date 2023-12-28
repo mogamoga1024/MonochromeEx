@@ -26,6 +26,7 @@ const vm = {
             this.updateAllCanvas();
         },
         onClickFileButton() {
+            this.$refs.fileInput.value = "";
             this.$refs.fileInput.click();
         },
         onChangeFile(e) {
@@ -94,11 +95,16 @@ const vm = {
                 image,
                 this.applyLuminosityMethod
             );
+
+            // 2つ並びにする。8はcolumn-gap
+            this.$refs.resultContainer.style.width = `${this.$refs.unprocessedCanvas.width * 2 + 8}px`;
+            
             this.isProcessing = false;
         },
         updateCanvas(canvas, image, applyMethod) {
             const context = canvas.getContext("2d", {willReadFrequently: true});
-            const canvasWidth = image.width < 500 ? image.width : 500;
+            const maxCanvasWidth = 500;
+            const canvasWidth = image.width < maxCanvasWidth ? image.width : maxCanvasWidth;
             canvas.width = canvasWidth;
             canvas.height = image.height * (canvasWidth / image.width);
             canvas.style.maxWidth = `${image.width}px`;
