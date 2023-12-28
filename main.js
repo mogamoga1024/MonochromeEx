@@ -2,6 +2,7 @@
 const vm = {
     data() {
         return {
+            fileName: "",
             isSelected: {
                 unprocessed: true,
                 averageMethod: true,
@@ -24,11 +25,15 @@ const vm = {
             this.imageSrc = "https://picsum.photos/800/400";
             this.updateAllCanvas();
         },
+        onClickFileButton() {
+            this.$refs.fileInput.click();
+        },
         onChangeFile(e) {
             const file = e.target.files[0];
             if (file == null) {
                 return;
             }
+            this.fileName = file.name;
             this.imageSrc = URL.createObjectURL(file);
             this.updateAllCanvas();
         },

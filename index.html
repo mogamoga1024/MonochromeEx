@@ -11,8 +11,11 @@
 <body>
   <div id="app">
     <div id="option">
-      <button @click="onClickRandomImageButton">ランダム画像</button>
-      <input type="file" id="input-file" @change="onChangeFile">
+      <div class="btn" ontouchstart="" @click="onClickRandomImageButton">ランダム画像</div>
+      <div>
+        <div class="btn" ontouchstart="" @click="onClickFileButton">ファイルを選択</div><span style="margin-left: 8px;">{{fileName}}</span>
+      </div>
+      <input ref="fileInput" type="file" @change="onChangeFile">
       <div id="medhod-option">
         <label for="unprocessed">無加工</label>
         <input id="unprocessed" type="checkbox" v-model="isSelected.unprocessed">
