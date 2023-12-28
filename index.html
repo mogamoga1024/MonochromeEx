@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>グレースケールの研究</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-size@1"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,8 +24,8 @@
         <input id="luminosity-method" type="checkbox" v-model="isSelected.luminosityMethod">
       </div>
     </div>
-    <template v-if="isError">
-      <div id="error">エラー！本当に画像？</div>
+    <template v-if="errorMessage !== ''">
+      <div id="error">{{errorMessage}}</div>
     </template>
     <template v-else>
       <div class="result" v-show="isSelected.unprocessed">

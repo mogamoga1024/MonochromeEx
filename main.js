@@ -9,7 +9,7 @@ const vm = {
                 luminosityMethod: true,
             },
             imageSrc: "https://picsum.photos/800/400",
-            isError: false,
+            errorMessage: "",
         }
     },
     mounted() {
@@ -48,12 +48,20 @@ const vm = {
         },
         async updateAllCanvas() {
             let image = undefined;
-            this.isError = false;
+            this.errorMessage = "";
             try {
                 image = await this.loadImage();
             }
             catch (e) {
-                this.isError = true;
+                this.errorMessage = "エラー！本当に画像？";
+                return;
+            }
+            const isValidCanvas = canvasSize.test({
+                width : image.width,
+                height: image.height
+            });
+            if (!isValidCanvas) {
+                this.errorMessage = "画像がでかすぎます…";
                 return;
             }
 
