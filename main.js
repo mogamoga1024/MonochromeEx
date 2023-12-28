@@ -13,7 +13,7 @@ const vm = {
         }
     },
     mounted() {
-        this.imageSrc = "images/clover_days.jpg";
+        // this.imageSrc = "images/clover_days.jpg";
         // this.imageSrc = "images/2.jpg";
         // this.imageSrc = "images/しもんきん.jpg";
         this.updateAllCanvas();
